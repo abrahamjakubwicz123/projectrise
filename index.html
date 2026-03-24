@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project RISE</title>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Raleway', sans-serif;
+  background:#fff;
+  color:#222;
+  -webkit-font-smoothing:antialiased;
+}
+a { text-decoration:none; color:inherit; }
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  background:#fff; border-bottom:1px solid #eee;
+  height:56px; display:flex;
+  align-items:center; justify-content:space-between;
+  padding:0 36px;
+}
+.nav-logo {
+  font-size:17px; font-weight:700; letter-spacing:.06em; color:#222;
+}
+.nav-links {
+  display:flex; gap:28px; list-style:none;
+}
+.nav-links a {
+  font-size:11px; font-weight:600; letter-spacing:.15em;
+  text-transform:uppercase; color:#888; transition:color .2s;
+}
+.nav-links a:hover { color:#222; }
+
+/* HERO */
+.hero {
+  margin-top:56px;
+  height:calc(100vh - 56px);
+  background:#1a2a3a;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; padding:0 24px;
+  position:relative; overflow:hidden;
+}
+.hero::after {
+  content:'';
+  position:absolute; inset:0;
+  background:rgba(0,0,0,.25);
+}
+.hero-inner { position:relative; z-index:1; }
+
+.hero-name {
+  font-size:clamp(48px,8vw,96px);
+  font-weight:800; color:#fff;
+  letter-spacing:.04em; line-height:1;
+  margin-bottom:16px;
+}
+.hero-name span { color:#C8922A; }
+
+.hero-tagline {
+  font-size:clamp(14px,2.5vw,20px);
+  font-weight:300; color:rgba(255,255,255,.7);
+  letter-spacing:.08em; margin-bottom:48px;
+  text-transform:uppercase;
+}
+
+.rise-row {
+  display:flex; justify-content:center; gap:0;
+  margin-bottom:52px;
+}
+.rise-item {
+  text-align:center; padding:0 28px;
+  border-right:1px solid rgba(255,255,255,.15);
+}
+.rise-item:last-child { border-right:none; }
+.ri-letter {
+  font-size:32px; font-weight:800;
+  color:#C8922A; display:block; line-height:1;
+}
+.ri-word {
+  font-size:9px; font-weight:600; letter-spacing:.2em;
+  text-transform:uppercase; color:rgba(255,255,255,.4);
+  display:block; margin-top:8px;
+}
+
+.hero-btn {
+  display:inline-block;
+  background:#C8922A; color:#fff;
+  padding:14px 40px; font-size:11px;
+  font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; transition:background .2s;
+}
+.hero-btn:hover { background:#a07020; }
+
+/* WELCOME */
+.welcome {
+  padding:80px 24px;
+  text-align:center;
+  border-bottom:1px solid #eee;
+  max-width:700px; margin:0 auto;
+}
+.welcome h2 {
+  font-size:clamp(22px,3.5vw,34px);
+  font-weight:700; color:#222;
+  line-height:1.3; margin-bottom:20px;
+  letter-spacing:.02em;
+}
+.welcome p {
+  font-size:15px; font-weight:300; color:#777;
+  line-height:1.85; margin-bottom:28px;
+}
+.welcome a {
+  font-size:11px; font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; color:#C8922A;
+  border-bottom:1px solid #C8922A; padding-bottom:2px;
+}
+
+/* SECTION TITLE */
+.sec-title {
+  text-align:center; padding:72px 24px 48px;
+}
+.sec-title h2 {
+  font-size:clamp(22px,3vw,32px);
+  font-weight:700; color:#222; letter-spacing:.04em;
+  margin-bottom:14px;
+}
+.sec-title p {
+  font-size:14px; font-weight:300; color:#888;
+  max-width:520px; margin:0 auto; line-height:1.8;
+}
+.sec-divider {
+  width:40px; height:2px; background:#C8922A;
+  margin:20px auto 0;
+}
+
+/* ABOUT */
+.about {
+  background:#f8f6f3;
+  border-top:1px solid #eee; border-bottom:1px solid #eee;
+}
+.about-inner {
+  max-width:1000px; margin:0 auto;
+  padding:80px 24px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:64px; align-items:center;
+}
+.about-photo {
+  background:#1a2a3a;
+  height:400px;
+  display:flex; align-items:center; justify-content:center;
+}
+.about-photo-placeholder {
+  font-size:11px; font-weight:600; letter-spacing:.2em;
+  text-transform:uppercase; color:rgba(255,255,255,.2);
+  text-align:center; padding:24px;
+}
+.about-copy h2 {
+  font-size:clamp(22px,3vw,30px);
+  font-weight:700; color:#222; margin-bottom:20px;
+  line-height:1.3;
+}
+.about-copy p {
+  font-size:14px; font-weight:300; color:#666;
+  line-height:1.85; margin-bottom:18px;
+}
+.about-quote {
+  font-size:16px; font-style:italic; font-weight:400;
+  color:#222; line-height:1.65;
+  border-left:3px solid #C8922A;
+  padding-left:20px; margin:24px 0;
+}
+
+/* PROGRAMS */
+.programs { padding-bottom:72px; }
+.programs-grid {
+  max-width:1000px; margin:0 auto;
+  padding:0 24px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.prog-card {
+  background:#f8f6f3;
+  border:1px solid #eee;
+  padding:36px 32px;
+  transition:box-shadow .2s;
+}
+.prog-card:hover { box-shadow:0 4px 20px rgba(0,0,0,.07); }
+.prog-number {
+  font-size:9px; font-weight:700; letter-spacing:.3em;
+  text-transform:uppercase; color:#ccc; margin-bottom:14px;
+}
+.prog-name {
+  font-size:18px; font-weight:700; color:#222;
+  margin-bottom:10px;
+}
+.prog-text {
+  font-size:13px; font-weight:300; color:#777;
+  line-height:1.8; margin-bottom:16px;
+}
+.prog-label {
+  font-size:10px; font-weight:700; letter-spacing:.15em;
+  text-transform:uppercase; color:#C8922A;
+}
+
+/* TEAM */
+.team {
+  background:#f8f6f3;
+  border-top:1px solid #eee; border-bottom:1px solid #eee;
+  padding-bottom:72px;
+}
+.team-grid {
+  max-width:900px; margin:0 auto; padding:0 24px;
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+.team-card {
+  background:#fff; border:1px solid #eee;
+  padding:44px 36px; text-align:center;
+}
+.team-photo {
+  width:80px; height:80px;
+  background:#1a2a3a; border-radius:50%;
+  margin:0 auto 20px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:22px; font-weight:800; color:#C8922A;
+  letter-spacing:.04em;
+}
+.team-name {
+  font-size:18px; font-weight:700; color:#222;
+  letter-spacing:.04em; text-transform:uppercase;
+  margin-bottom:6px;
+}
+.team-role {
+  font-size:10px; font-weight:600; letter-spacing:.2em;
+  text-transform:uppercase; color:#C8922A; margin-bottom:18px;
+}
+.team-bio {
+  font-size:13px; font-weight:300; color:#777; line-height:1.8;
+}
+
+/* SERVE */
+.serve { padding-bottom:72px; }
+.serve-grid {
+  max-width:1000px; margin:0 auto; padding:0 24px;
+  display:grid; grid-template-columns:1fr 1fr 1fr;
+  gap:16px;
+}
+.serve-card {
+  border:1px solid #eee; padding:28px 24px;
+  transition:border-color .2s;
+}
+.serve-card:hover { border-color:#C8922A; }
+.serve-name {
+  font-size:14px; font-weight:700; color:#222;
+  margin-bottom:10px;
+}
+.serve-desc {
+  font-size:13px; font-weight:300; color:#888; line-height:1.75;
+}
+
+/* SOCIAL */
+.social {
+  background:#f8f6f3;
+  border-top:1px solid #eee; border-bottom:1px solid #eee;
+  padding:72px 24px;
+  text-align:center;
+}
+.social h2 {
+  font-size:clamp(20px,3vw,28px);
+  font-weight:700; color:#222; margin-bottom:12px;
+}
+.social p {
+  font-size:14px; font-weight:300; color:#888;
+  margin-bottom:36px;
+}
+.social-grid {
+  max-width:800px; margin:0 auto;
+  display:grid; grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+.social-tile {
+  background:#1a2a3a;
+  aspect-ratio:1;
+  display:flex; align-items:center; justify-content:center;
+  font-size:9px; font-weight:600; letter-spacing:.15em;
+  text-transform:uppercase; color:rgba(255,255,255,.15);
+}
+.social-handles {
+  margin-top:28px;
+  display:flex; justify-content:center; gap:24px;
+}
+.social-handle {
+  font-size:12px; font-weight:600; letter-spacing:.12em;
+  text-transform:uppercase; color:#C8922A;
+}
+
+/* CONTACT */
+.contact {
+  padding:80px 24px;
+  text-align:center; max-width:600px; margin:0 auto;
+}
+.contact h2 {
+  font-size:clamp(22px,3.5vw,32px);
+  font-weight:700; color:#222; margin-bottom:14px;
+}
+.contact p {
+  font-size:14px; font-weight:300; color:#777;
+  line-height:1.85; margin-bottom:36px;
+}
+.contact-info { margin-bottom:36px; }
+.contact-row {
+  font-size:14px; color:#444; margin-bottom:10px;
+}
+.contact-row strong { color:#222; font-weight:600; }
+.contact-btn {
+  display:inline-block;
+  background:#222; color:#fff;
+  padding:13px 36px; font-size:11px;
+  font-weight:700; letter-spacing:.2em;
+  text-transform:uppercase; transition:background .2s;
+}
+.contact-btn:hover { background:#C8922A; }
+
+/* FOOTER */
+footer {
+  background:#1a2a3a;
+  padding:48px 36px 28px;
+  text-align:center;
+}
+.footer-logo {
+  font-size:20px; font-weight:800; color:#fff;
+  letter-spacing:.06em; margin-bottom:8px;
+}
+.footer-logo span { color:#C8922A; }
+.footer-tagline {
+  font-size:11px; font-weight:400; letter-spacing:.15em;
+  text-transform:uppercase; color:rgba(255,255,255,.3);
+  margin-bottom:28px;
+}
+.footer-links {
+  display:flex; justify-content:center; gap:28px;
+  list-style:none; margin-bottom:36px;
+}
+.footer-links a {
+  font-size:11px; font-weight:500; letter-spacing:.12em;
+  text-transform:uppercase; color:rgba(255,255,255,.3);
+  transition:color .2s;
+}
+.footer-links a:hover { color:#C8922A; }
+.footer-copy {
+  font-size:11px; color:rgba(255,255,255,.15);
+  font-weight:300; line-height:1.8;
+}
+
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Project RISE</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#serve">Who We Serve</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <h1 class="hero-name">Project <span>RISE</span></h1>
+    <p class="hero-tagline">Empowering Immigrant Families Through Financial Education</p>
+    <div class="rise-row">
+      <div class="rise-item">
+        <span class="ri-letter">R</span>
+        <span class="ri-word">Resources</span>
+      </div>
+      <div class="rise-item">
+        <span class="ri-letter">I</span>
+        <span class="ri-word">Income</span>
+      </div>
+      <div class="rise-item">
+        <span class="ri-letter">S</span>
+        <span class="ri-word">Skills</span>
+      </div>
+      <div class="rise-item">
+        <span class="ri-letter">E</span>
+        <span class="ri-word">Empowerment</span>
+      </div>
+    </div>
+    <a href="#about" class="hero-btn">Learn More</a>
+  </div>
+</section>
+
+<!-- WELCOME -->
+<div class="welcome">
+  <h2>Welcome to Project RISE</h2>
+  <p>We deliver monthly care kits and financial workshops directly to immigrant and underrepresented families across Miami. Every kit is paired with a workshop. Every workshop leaves a family better equipped. Your financial future starts here.</p>
+  <a href="#programs">See Our Programs</a>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-photo">
+      <div class="about-photo-placeholder">Project RISE<br>Miami, FL<br>Est. 2025</div>
+    </div>
+    <div class="about-copy">
+      <h2>Our Story</h2>
+      <p>When one of our founders' families immigrated to the United States, they were scammed — targeted because they were new and unfamiliar with the American financial system. They rebuilt from scratch.</p>
+      <div class="about-quote">"We are not waiting until we are adults to fix this. We are starting now."</div>
+      <p>We are two high school sophomores from Miami. We started Project RISE because we lived the problem — and we decided to solve it. We deliver care kits and run financial workshops at shelters, schools, and community centers every month.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="programs" id="programs">
+  <div class="sec-title">
+    <h2>Our Programs</h2>
+    <p>Four workshops delivered alongside care kits at every partner location.</p>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="programs-grid">
+    <div class="prog-card">
+      <div class="prog-number">01</div>
+      <div class="prog-name">ScamShield</div>
+      <p class="prog-text">Teaches immigrant families how to identify and avoid the most common financial scams — fake jobs, predatory lenders, and wire fraud. Co-presented with local law enforcement.</p>
+      <div class="prog-label">Adults &nbsp;·&nbsp; 60 min</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-number">02</div>
+      <div class="prog-name">WealthRoad</div>
+      <p class="prog-text">A step-by-step guide to financial stability — how to open a bank account, understand your credit score, avoid debt traps, and start saving. Participants use their kit during the session.</p>
+      <div class="prog-label">Adults &nbsp;·&nbsp; 60 min</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-number">03</div>
+      <div class="prog-name">Money Basics for Kids</div>
+      <p class="prog-text">An age-appropriate introduction to money, saving, and goals. Delivered in schools with our WealthKids kit. Kids complete a fun savings activity during the workshop.</p>
+      <div class="prog-label">Ages 5–14 &nbsp;·&nbsp; 45 min</div>
+    </div>
+    <div class="prog-card">
+      <div class="prog-number">04</div>
+      <div class="prog-name">Youth Entrepreneur</div>
+      <p class="prog-text">Business basics for teens — income statements, break-even, and pitching. Expanding internationally through our FUNDANA partnership in Venezuela. Delivered in English and Spanish.</p>
+      <div class="prog-label">Teens &nbsp;·&nbsp; 60 min</div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team" id="team">
+  <div class="sec-title">
+    <h2>Meet the Team</h2>
+    <p>Two high school sophomores from Miami who decided not to wait.</p>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-photo">AJ</div>
+      <div class="team-name">Abraham Jakubowicz</div>
+      <div class="team-role">Co-Founder &nbsp;·&nbsp; President</div>
+      <p class="team-bio">Abraham leads Project RISE's international operations and our FUNDANA partnership in Venezuela. His family's experience being scammed after immigrating to the US is the origin story this nonprofit is built on. He is pursuing finance in college.</p>
+    </div>
+    <div class="team-card">
+      <div class="team-photo">MB</div>
+      <div class="team-name">Marcelo Bracho</div>
+      <div class="team-role">Co-Founder &nbsp;·&nbsp; President</div>
+      <p class="team-bio">Marcelo leads domestic outreach, workshop delivery, and kit design. He believes financial literacy is a right — not a privilege. He oversees every kit and every partnership in Miami. He is pursuing finance in college.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="serve" id="serve">
+  <div class="sec-title">
+    <h2>Who We Serve</h2>
+    <p>We go directly to the communities that need us most.</p>
+    <div class="sec-divider"></div>
+  </div>
+  <div class="serve-grid">
+    <div class="serve-card">
+      <div class="serve-name">Homeless Shelters</div>
+      <p class="serve-desc">Families in crisis with no financial footing. Our kits provide a tangible first step toward stability.</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-name">Immigrant Processing Centers</div>
+      <p class="serve-desc">Newly arrived families at their most vulnerable. First-touch financial education when it matters most.</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-name">Low-Income Schools</div>
+      <p class="serve-desc">WealthKids kits and Money Basics workshops delivered directly in classrooms across Miami.</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-name">Churches & Community Centers</div>
+      <p class="serve-desc">Trusted community anchors where families already gather. Consistent monthly kit drops and workshops.</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-name">Women's Shelters</div>
+      <p class="serve-desc">Women rebuilding their lives. Financial tools for them and WealthKids kits for their children.</p>
+    </div>
+    <div class="serve-card">
+      <div class="serve-name">FUNDANA — Venezuela</div>
+      <p class="serve-desc">A 35-year-old Venezuelan nonprofit powering our international expansion. Workshops in Spanish.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section class="social">
+  <h2>Follow Our Journey</h2>
+  <p>See our kit deliveries, workshops, and impact stories on social media.</p>
+  <div class="social-grid">
+    <div class="social-tile">Photo</div>
+    <div class="social-tile">Photo</div>
+    <div class="social-tile">Photo</div>
+    <div class="social-tile">Photo</div>
+  </div>
+  <div class="social-handles">
+    <span class="social-handle">@projectrise</span>
+    <span class="social-handle">Instagram</span>
+    <span class="social-handle">TikTok</span>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <h2>Get in Touch!</h2>
+  <p>We are here to help you on your journey to financial empowerment. Whether you're a school, a shelter, or a potential partner — reach out. Together we can make a difference.</p>
+  <div class="contact-info">
+    <div class="contact-row"><strong>Email:</strong> <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dfafadb0b5babcabadb6acba9fb8b2beb6b3f1bcb0b2">[email&#160;protected]</a></div>
+    <div class="contact-row"><strong>Location:</strong> Miami, Florida</div>
+    <div class="contact-row"><strong>Social:</strong> @projectrise</div>
+  </div>
+  <a href="/cdn-cgi/l/email-protection#5222203d38373126203b213712353f333b3e7c313d3f" class="contact-btn">Send Us a Message</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Project <span>RISE</span></div>
+  <div class="footer-tagline">Resources · Income · Skills · Empowerment</div>
+  <ul class="footer-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#programs">Programs</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#serve">Who We Serve</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </u
